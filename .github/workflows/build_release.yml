@@ -25,7 +25,7 @@ jobs:
       run: |
         echo "Working Path: ${Env:GITHUB_WORKSPACE}"
         $branchName = $Env:GITHUB_REF -replace 'refs/heads/', ''
-        echo "CURRENT_REF=$Env:GITHUB_REF" >> $Env:CURRENT_REF"
+        echo "CURRENT_REF=$Env:GITHUB_REF" >> $Env:CURRENT_REF
         echo "Branch: ${branchName}"
         echo "CURRENT_BRANCH=${branchName}" >> $Env:GITHUB_ENV
     - name: Get go version
