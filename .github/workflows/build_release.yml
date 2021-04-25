@@ -21,14 +21,14 @@ jobs:
     - name: Setup go
       uses: actions/setup-go@v2
 
-    - name: Set Variables
+    - name: Get branch & rev
       run: |
         echo "Working Path: ${Env:GITHUB_WORKSPACE}"
         $branchName = $Env:GITHUB_REF -replace 'refs/heads/', ''
-        $ref = $ENV:GITHUB_REF
-        echo "CURRENT_REF=${ref}" >> $Env:GITHUB_ENV
         echo "Branch: ${branchName}"
         echo "CURRENT_BRANCH=${branchName}" >> $Env:GITHUB_ENV
+        $revision = (git rev-parse HEAD)
+        echo "REVISION=${revision} >> $Env:GITHUB_ENV
     - name: Get go version
       run: |
         $vers=((go version) -replace "go version go", "" -replace " windows/amd64" )
@@ -54,7 +54,7 @@ jobs:
           -X github.com/1dustindavis/gorilla/pkg/version.version=${{ steps.create_tag.outputs.version_tag }}`
           -X github.com/1dustindavis/gorilla/pkg/version.branch=${{ env.CURRENT_BRANCH }}`
           -X github.com/1dustindavis/gorilla/pkg/version.buildDate=$(Get-Date -format s)`
-          -X github.com/1dustindavis/gorilla/pkg/version.revision=${{ env.CURRENT_REF }}`
+          -X github.com/1dustindavis/gorilla/pkg/version.revision=${{ env.REVISION }}`
           -X github.com/1dustindavis/gorilla/pkg/version.goVersion=${{ env.GO_VERSION }}"`
 
     - name: Cut release
