@@ -28,7 +28,7 @@ jobs:
         echo "Branch: ${branchName}"
         echo "CURRENT_BRANCH=${branchName}" >> $Env:GITHUB_ENV
         $revision = (git rev-parse HEAD)
-        echo "REVISION=${revision} >> $Env:GITHUB_ENV
+        echo "REVISION=${revision}" >> $Env:GITHUB_ENV
     - name: Get go version
       run: |
         $vers=((go version) -replace "go version go", "" -replace " windows/amd64" )
