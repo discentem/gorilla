@@ -25,6 +25,7 @@ jobs:
       run: |
         echo "Working Path: ${Env:GITHUB_WORKSPACE}"
         $branchName = $Env:GITHUB_REF -replace 'refs/heads/', ''
+        echo "CURRENT_REF=$Env:GITHUB_REF" >> $Env:CURRENT_REF"
         echo "Branch: ${branchName}"
         echo "CURRENT_BRANCH=${branchName}" >> $Env:GITHUB_ENV
     - name: Get go version
@@ -52,6 +53,7 @@ jobs:
           -X github.com/1dustindavis/gorilla/pkg/version.version=${{ steps.create_tag.outputs.version_tag }}`
           -X github.com/1dustindavis/gorilla/pkg/version.branch=${{ env.CURRENT_BRANCH }}`
           -X github.com/1dustindavis/gorilla/pkg/version.buildDate=$(Get-Date -format s)`
+          -X github.com/1dustindavis/gorilla/pkg/version.revision=${{ env.CURRENT_REF }}`
           -X github.com/1dustindavis/gorilla/pkg/version.goVersion=${{ env.GO_VERSION }}"`
 
     - name: Cut release
