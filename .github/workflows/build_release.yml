@@ -40,7 +40,7 @@ jobs:
         major_pattern: "(MAJOR)"
         minor_pattern: "/[\\s]*/"
         format: "${major}.${minor}"
-        namespace: gorilla
+        namespace: ''
         short_tags: false
         bump_each_commit: false
 
