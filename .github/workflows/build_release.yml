@@ -45,6 +45,7 @@ jobs:
         bump_each_commit: false
 
     - name: Build
+      working-directory: ./cmd/gorilla
       run: |
         go build -v -ldflags="`
           -X github.com/1dustindavis/gorilla/pkg/version.appName=gorilla`
@@ -52,7 +53,6 @@ jobs:
           -X github.com/1dustindavis/gorilla/pkg/version.branch=${{ env.CURRENT_BRANCH }}`
           -X github.com/1dustindavis/gorilla/pkg/version.buildDate=$(Get-Date -format s)`
           -X github.com/1dustindavis/gorilla/pkg/version.goVersion=${{ env.GO_VERSION }}"`
-          ./cmd/gorilla
 
     - name: Cut release
       uses: ncipollo/release-action@v1
